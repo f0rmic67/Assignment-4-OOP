@@ -58,6 +58,27 @@
 //     Preconditions:	none
 //     Postcondition:	time of the clock is printed
 //
+// FRIEND FUNCTIONS
+//	friend Clock operator+(const Clock&, const Clock&)
+//		Description:	adds specified number of minutes
+//		Precondition:	needs a clock object
+//		Postcondition:	minutes are added to the clock object
+//
+//	friend bool operator<(const Clock&, const Clock&);
+//		Description:	determines if the time is less than the time of another clock or equal
+//		Precondition:	needs two clock objects to compare
+//		Postcondition:	returns true if less than or equal
+//
+//	friend bool operator>(const Clock&, const Clock&);
+//		Description:	determines if the time is greater than the time of another clock or equal
+//		Precondition:	needs two clock objects to compare
+//		Postcondition:	returns true if greater than or equal
+//
+//	friend bool operato==(const Clock&, const Clock&);
+//		Description:	determines if two clocks have equal or not equal time
+//		Precondition:	needs two clock objcts to compare
+//		Postcondition:	returns true if time is equal and false if time is not equal
+
 
 #ifndef CLOCK_H
 #define CLOCK_H
@@ -82,6 +103,13 @@ class Clock
     int  gethour         () const;
     int  getminute       () const;
     void display         () const;
+    
+    // FRIEND FUNCTIONS
+    friend Clock operator+(const Clock&, const Clock&);
+    friend bool operator<(const Clock&, const Clock&);
+    friend bool operator>(const Clock&, const Clock&);
+    friend bool operator==(const Clock&, const Clock&);
+    
     
   private:
     std::string period;
