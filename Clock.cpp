@@ -204,3 +204,106 @@ void Clock::display() const
 	return;
 }
 
+Clock operator+ (Clock& c1, const int& c2)
+{
+	Clock answer = c1;
+	for(int i=0; i<c2; i++)
+		answer.addminute();
+	return answer;
+	
+	
+	/*
+	Clock answer = c1;
+	answer.minute = answer.minute + c2;
+	if(answer.minute >= 60)
+		for()
+	return answer;
+	*/	
+}
+
+bool operator== (const Clock& lhs, const Clock& rhs)
+{
+	return(lhs.hour == rhs.hour && lhs.minute == rhs.minute && lhs.period == rhs.period);				
+}
+
+
+bool operator!= (const Clock& lhs, const Clock& rhs)
+{	
+	return(lhs.hour != rhs.hour || lhs.minute != rhs.minute || lhs.period != rhs.period);
+/*
+	if(!(lhs == rhs))
+	
+	return true;
+ /*/   
+}
+
+
+bool operator> (const Clock& lhs, const Clock& rhs)
+{
+		
+			bool answer;
+			if(lhs.period == "PM" && rhs.period == "AM")
+			{
+				answer = true;
+			}
+			if(lhs.period == rhs.period)
+			{
+				if(lhs.hour > rhs.hour)
+				{
+					answer = true;
+				}
+				if(lhs.hour == rhs.hour && lhs.minute > rhs.minute)
+				{
+					answer = true;
+				}
+			}
+			else
+				answer = false;
+				
+			return answer;
+			
+}
+
+bool operator< (const Clock& lhs, const Clock& rhs)
+{
+		
+			bool answer;
+			if(lhs.period == "AM" && rhs.period == "PM")
+			{
+				answer = true;
+			}
+			if(lhs.period == rhs.period)
+			{
+				if(lhs.hour < rhs.hour)
+				{
+					answer = true;
+				}
+				if(lhs.hour == rhs.hour && lhs.minute < rhs.minute)
+				{
+					answer = true;
+				}
+			}
+			else
+				answer = false;
+				
+			return answer;
+			
+}
+
+bool operator<= (const Clock& lhs, const Clock& rhs)
+{
+	bool answer;
+	if(c1 < c2 || c1 == c2)
+		{
+		answer = true;
+		}
+}
+
+bool operator>= (const Clock& lhs, const Clock& rhs)
+{
+	bool answer;
+	if(lhs > rhs || lhs == rhs)
+		{
+		return true;
+		}
+}
