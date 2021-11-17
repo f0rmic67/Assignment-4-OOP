@@ -92,7 +92,7 @@
 //	friend bool operator>=(const Clock&, const Clock&);
 //		Description:	determines if the time is greater than the time of another clock or equal
 //		Precondition:	needs two clock objects to compare
-//		Postcondition:	returns true if greater than or equal
+//		Postcondition:	returns true if greater than or equal.
 
 #ifndef CLOCK_H
 #define CLOCK_H
