@@ -7,7 +7,7 @@ using namespace std;
 
 Clock::Clock()
 {
-	hour = 12;
+	hour = 6;
 	minute = 00;
 	period = "AM";
 	
@@ -210,15 +210,6 @@ Clock operator+ (Clock& c1, const int& c2)
 	for(int i=0; i<c2; i++)
 		answer.addminute();
 	return answer;
-	
-	
-	/*
-	Clock answer = c1;
-	answer.minute = answer.minute + c2;
-	if(answer.minute >= 60)
-		for()
-	return answer;
-	*/	
 }
 
 bool operator== (const Clock& lhs, const Clock& rhs)
@@ -226,27 +217,25 @@ bool operator== (const Clock& lhs, const Clock& rhs)
 	return(lhs.hour == rhs.hour && lhs.minute == rhs.minute && lhs.period == rhs.period);				
 }
 
-
 bool operator!= (const Clock& lhs, const Clock& rhs)
 {	
-	return(lhs.hour != rhs.hour || lhs.minute != rhs.minute || lhs.period != rhs.period);
-/*
-	if(!(lhs == rhs))
-	
-	return true;
- /*/   
+	bool answer = false;
+	if(!(lhs == rhs)) 
+		bool answer = true;
+		
+	return answer;
 }
 
 
 bool operator> (const Clock& lhs, const Clock& rhs)
 {
 		
-			bool answer;
+			bool answer = false;
 			if(lhs.period == "PM" && rhs.period == "AM")
 			{
 				answer = true;
 			}
-			if(lhs.period == rhs.period)
+			else if(lhs.period == rhs.period)
 			{
 				if(lhs.hour > rhs.hour)
 				{
@@ -258,8 +247,9 @@ bool operator> (const Clock& lhs, const Clock& rhs)
 				}
 			}
 			else
+			{
 				answer = false;
-				
+			}	
 			return answer;
 			
 }
@@ -267,12 +257,13 @@ bool operator> (const Clock& lhs, const Clock& rhs)
 bool operator< (const Clock& lhs, const Clock& rhs)
 {
 		
-			bool answer;
+			bool answer = false;
+			
 			if(lhs.period == "AM" && rhs.period == "PM")
 			{
 				answer = true;
 			}
-			if(lhs.period == rhs.period)
+			else if(lhs.period == rhs.period)
 			{
 				if(lhs.hour < rhs.hour)
 				{
@@ -284,26 +275,35 @@ bool operator< (const Clock& lhs, const Clock& rhs)
 				}
 			}
 			else
+			{
 				answer = false;
-				
+			}
 			return answer;
 			
 }
 
 bool operator<= (const Clock& lhs, const Clock& rhs)
 {
-	bool answer;
-	if(c1 < c2 || c1 == c2)
-		{
+	bool answer = false;
+	if(lhs < rhs || lhs == rhs)
 		answer = true;
-		}
+		return answer;
+		
 }
 
 bool operator>= (const Clock& lhs, const Clock& rhs)
-{
+{	
 	bool answer;
+	if(operator>(lhs, rhs) || operator==(lhs, rhs))
+		answer = true;
+	else
+		 answer = false;
+	return answer;
+
+/*
+	bool answer = false;
 	if(lhs > rhs || lhs == rhs)
-		{
-		return true;
-		}
+		answer = true;
+		return answer;
+	*/	
 }
