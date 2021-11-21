@@ -10,13 +10,14 @@ Clock::Clock()
 	hour = 12;
 	minute = 00;
 	period = "AM";
+	badinput = false;
 	
 	return;
 }
 
 void Clock::setperiod(const string p)
 {
-	if(p == "AM" || p == "am" || p == "Am" || p == "PM" || p == "pm" || p == "Pm")
+	if(p == "AM" || p == "PM")
 		period = p;
 		
 	return;
@@ -27,6 +28,13 @@ void Clock::sethour(const int h)
 	if(h >= 1 && h <= 12)
 		hour = h;
 		
+	return;
+}
+
+void Clock::setbadinput(const bool b)
+{
+	badinput = b;
+	
 	return;
 }
 
@@ -96,7 +104,7 @@ void Clock::settime()
 					goodData = false;
 			}
 			
-			if(period1 != "AM" && period1 != "am" && period1 != "Am" && period1 != "PM" && period1 != "pm" && period1 != "Pm")
+			if(period1 != "AM" && period1 != "PM")
 				goodData = false;   
 		}
 		
@@ -119,7 +127,7 @@ void Clock::addhour()
 		
 	else if(hour == 11)
 	{
-		if(period == "AM" || period == "am" || period == "Am")
+		if(period == "AM")
 		{
 			hour++;
 			period = "PM";
@@ -143,7 +151,7 @@ void Clock::addminute()
 	{
 		if(hour == 11)
 		{
-			if(period == "AM" || period == "am" || period == "Am")
+			if(period == "AM")
 			{
 				minute = 0; 
 				hour++;
@@ -190,6 +198,11 @@ int Clock::getminute() const
 	return minute;
 }
 
+bool Clock::getbadinput() const
+{
+	return badinput;	
+}
+
 void Clock::display() const
 {
 	cout << "\n" << hour << ":";
@@ -204,3 +217,142 @@ void Clock::display() const
 	return;
 }
 
+Clock operator+(const Clock& c1, const int& n1)  //overloaded to add specific number of minutes to time
+{
+	Clock answer;
+	int hours, minutes;
+	
+	answer = c1;
+	
+	if(n1 > 0)
+	{
+		for(int count = 0; count < n1; count++)
+		{
+			answer.addminute();
+		}	
+	}
+	
+	return answer;
+}
+
+bool operator>(const Clock& c1, const Clock& c2)
+{
+	bool answer;
+	
+	if((c1.hour > c2.hour && c1.period == c2.period) || (c1.period == "PM" && c2.period == "AM"))
+	{
+		answer = true;
+		return answer;
+	}
+	
+	else if(c1.hour == c2.hour && c1.period == c2.period)
+	{
+		if(c1.minute > c2.minute)
+		{
+			answer = true;
+		}
+		else
+			answer = false;
+	}
+	
+	else
+	{
+		answer = false;
+		return false;
+	}
+	
+	return answer;
+}
+
+
+bool operator<(const Clock& c1, const Clock& c2)
+{
+	bool answer;
+	
+	if(operator>(c1, c2) == false && operator==(c1, c2) == false)
+		answer = true;
+		
+	else
+		answer = false;
+		
+	return answer;
+}
+
+bool operator==(const Clock& c1, const Clock& c2)
+{
+	bool answer;
+	
+	if(c1.hour == c2.hour && c1.minute == c2.minute && c1.period == c2.period)
+		answer = true;
+		
+	else 
+		answer = false;
+		
+	return answer;
+}
+
+bool operator>=(const Clock& c1, const Clock& c2)
+{
+	bool answer;
+	
+	if(operator>(c1, c2) || operator==(c1, c2))
+		answer = true;
+		
+	else
+		answer = false;
+		
+	return answer;
+}
+
+bool operator<=(const Clock& c1, const Clock& c2)
+{
+	bool answer;
+	
+	if(operator<(c1, c2) || operator==(c1, c2))
+		answer = true;
+	
+	else
+		answer = false;
+		
+	return answer;
+
+}
+
+bool operator!=(const Clock& c1, const Clock& c2)
+{
+	bool answer;
+	
+	if(!(operator==(c1, c2)))
+		answer = true;
+	
+	else
+		answer = false;
+		
+	return answer;
+}
+/*
+ostream& operator<<(ostream& out, const Clock& c1)
+{
+	out << "\n" << c1.hour << ":";
+	
+	if(c1.minute < 10)
+		out << "0" << c1.minute;
+	else
+		out << c1.minute;
+		
+	out << " " << c1.period << endl;
+	
+	return out;
+}
+
+istream& operator>>(istream& inp, Clock& c1)
+{
+	string temp;
+	
+	getline(inp, temp);
+	
+	c1.settime(temp);
+	
+	return inp;
+}
+*/
