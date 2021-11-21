@@ -58,24 +58,36 @@ int main() {
 			if (grandfather != newClock)
 				cout << "They are definitely not equal.\n";
 			else
-				cout << "They are equal.\n";
+				cout << "They are definitely equal.\n";
 			
 		else if(choice == 8)
-			if (grandfather > newClock)
-				cout << "Your time is greater than 12:00 AM";
-		
+			if (grandfather == newClock)
+				cout << "Your time is actually equal to 6:00 AM\n";
+			else if (grandfather > newClock)
+				cout << "Your time is greater than 6:00 AM\n";
+			else
+				cout << "Your time is less than 6:00 AM\n";
+				
 		else if(choice == 9)
-			if (grandfather < newClock)
-				cout << "Your time is less than 12:00 AM";
+			if (grandfather == newClock)
+				cout << "Your time is absolutely equal to 6:00 AM\n";
+			else if (grandfather < newClock)
+				cout << "Your time is less than 6:00 AM\n";
+			else
+				cout << "Your time is greater than 6:00 AM\n";
 				
 		else if(choice == 10)
 			if (grandfather >= newClock)
-				cout << "Your time is greater than or equal to 12:00 AM";
+				cout << "Your time is greater than or equal to 6:00 AM\n";
+			else 
+				cout << "Your time is less than 6:00 AM\n";
 				
 		else if(choice == 11)
 			if (grandfather <= newClock)
-				cout << "Your time is less than or equal to 12:00 AM";
-			
+				cout << "Your time is less than or equal to 6:00 AM\n";
+			else
+				cout << "Your time is greater than 6:00 AM\n";
+				
    		else if(choice == 12)
    			cout << "\nExiting..." << endl;
    			
