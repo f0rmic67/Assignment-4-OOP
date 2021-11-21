@@ -62,6 +62,9 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 #include <string>
+#include <iostream>
+
+using namespace std;
 
 class Clock
 {
@@ -74,6 +77,7 @@ class Clock
     void sethour          (const int);
     void setminute        (const int);
     void settime                   ();
+    void setbadinput     (const bool);
     void addhour                   ();
     void addminute                 ();
 
@@ -81,12 +85,25 @@ class Clock
     std::string getperiod() const;
     int  gethour         () const;
     int  getminute       () const;
+    bool getbadinput     () const;
     void display         () const;
     
+    //OVERLOADED OPERATORS
+    friend Clock operator+  (const Clock&, const int&);
+    friend bool operator> (const Clock&, const Clock&);
+    friend bool operator< (const Clock&, const Clock&);
+    friend bool operator==(const Clock&, const Clock&);
+    friend bool operator>=(const Clock&, const Clock&);
+    friend bool operator<=(const Clock&, const Clock&);
+    friend bool operator!=(const Clock&, const Clock&);
+   /* friend ostream& operator<<(ostream&, const Clock&);
+    friend istream& operator>>(istream&, const Clock&);*/
+    
   private:
-    std::string period;
+    string period;
     int  hour;
     int  minute;
+    bool badinput;   //set to false with constructor, switches to true if bad data is input when setting the clock's time
 };
 
 #endif
