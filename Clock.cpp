@@ -287,23 +287,45 @@ bool operator<= (const Clock& lhs, const Clock& rhs)
 	bool answer = false;
 	if(lhs < rhs || lhs == rhs)
 		answer = true;
-		return answer;
-		
+		return answer;		
 }
 
 bool operator>= (const Clock& lhs, const Clock& rhs)
 {	
-	bool answer;
-	if(operator>(lhs, rhs) || operator==(lhs, rhs))
-		answer = true;
-	else
-		 answer = false;
-	return answer;
-
-/*
 	bool answer = false;
 	if(lhs > rhs || lhs == rhs)
 		answer = true;
-		return answer;
-	*/	
+		return answer;	
+}
+
+ostream& operator<< (ostream& outp, const Clock& c1)
+{
+	outp << "\n" << c1.hour << ":";
+	if(c1.minute < 10)
+		outp << "0" << c1.minute;
+	else
+		outp << c1.minute;
+		
+	outp << " " << c1.period << endl;
+	return outp;
+}
+
+istream& operator>> (istream& inp, Clock& c1)
+{
+
+	char ch;
+	
+	cout << "Enter the hour" << endl;
+	inp >> c1.hour;
+	inp.get(ch);
+	
+	cout << "Enter the minute" << endl;
+	inp >> c1.minute;
+	inp.get(ch);
+	
+	cout << "Enter AM or PM" << endl;
+	inp >> c1.period;
+
+	return inp;
+ 
 }
