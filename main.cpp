@@ -2,13 +2,14 @@
 #include <string>
 #include "clock.h"
 
+
 using namespace std;
 
 int main() {
 	
 	Clock grandfather;
 	Clock newClock;
-	
+	int addmins = 0; 
 	int choice;
 	
 	do
@@ -29,10 +30,10 @@ int main() {
    		cin.ignore();   //Without this ignore, getline in settime function will run without user input
    		
    		if(choice == 1)
-   			grandfather.settime();
+   			cin >> grandfather;
    			
    		else if(choice == 2)
-   			grandfather.display();
+   			cout << grandfather;
    			
    		else if(choice == 3)
    			grandfather.addhour();
@@ -41,12 +42,15 @@ int main() {
    			grandfather.addminute();
    			
    		else if(choice == 5)
-   			{
-   			int addmins = 0;
-			cout << "Enter the number of minutes to add" << endl;
-			cin >> addmins;
-			grandfather = grandfather + addmins;
+ 		{	
+ 			cout << "\nEnter the number of minutes to add: ";
+    			while(!(cin >> addmins) || cin.peek() != '\n' || choice < 1)
+			{
+				cin.clear();
+				cin.ignore(30000, '\n');
 			}
+			grandfather = grandfather + addmins;
+		}
    				
    		else if(choice == 6)
 		    if (grandfather == newClock)
