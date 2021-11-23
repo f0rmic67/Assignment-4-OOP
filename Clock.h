@@ -92,11 +92,24 @@
 //	friend bool operator>=(const Clock&, const Clock&);
 //		Description:	determines if the time is greater than the time of another clock or equal
 //		Precondition:	needs two clock objects to compare
-//		Postcondition:	returns true if greater than or equal.
+//		Postcondition:	returns true if greater than or equal
+//
+//	friend ostream& operator<< (ostream&, const Clock&);
+//		Description:	allows a class object to be output
+//		Precondition:	none
+//		Postcondition:	the class object is displayed
+//	
+//	friend friend istream& operator>> (istream&, Clock&);
+//		Description:	allows data to be input into object
+//		Precondition:	user need to enter the data
+//		Postcondition:	users data is stored
 
+#include <iostream>
 #ifndef CLOCK_H
 #define CLOCK_H
 #include <string>
+
+using namespace std;
 
 class Clock
 {
@@ -126,6 +139,9 @@ class Clock
     friend bool operator>=(const Clock&, const Clock&);
     friend bool operator==(const Clock&, const Clock&);
     friend bool operator!=(const Clock&, const Clock&);
+    
+    friend ostream& operator<< (ostream&, const Clock&);
+    friend istream& operator>> (istream&, Clock&);
     
   private:
     std::string period;
